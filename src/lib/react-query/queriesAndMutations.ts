@@ -179,15 +179,19 @@ export const useGetPosts = () => {
         queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
         queryFn: getInfinitePosts,
         getNextPageParam: (lastPage) => {
+            if (!lastPage || !Array.isArray(lastPage.documents)) {
+                return null;
+            }
+
             // If there's no data, there are no more pages.
-            if (lastPage && lastPage.documents.length === 0) {
+            if (lastPage.documents.length === 0) {
                 return null;
             }
 
             // Use the $id of the last document as the cursor.
-            const lastId = lastPage.documents[lastPage?.documents.length - 1].$id;
+            const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
             return lastId;
-        },
+        }
     });
 };
 

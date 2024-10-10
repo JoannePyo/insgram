@@ -9,7 +9,7 @@ import {Models} from "appwrite";
 
 export type SearchResultProps = {
     isSearchFetching: boolean;
-    searchedPosts: Models.Document[];
+    searchedPosts: Models.DocumentList<Models.Document> | undefined; // 수정된 부분
 };
 
 const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) => {
@@ -100,17 +100,19 @@ const Explore = () => {
                     <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
                 ) : (
                     posts.pages.map((item, index) => (
-                        <GridPostList key={`page-${index}`} posts={item.documents} />
+                        item?.documents ? (
+                            <GridPostList key={`page-${index}`} posts={item.documents}/>
+                        ) : null
                     ))
                 )}
             </div>
             {hasNextPage && !searchValue && (
                 <div ref={ref} className="mt-10">
-                    <Loader />
+                    <Loader/>
                 </div>
             )}
         </div>
     )
 }
 
-            export default Explore
+export default Explore

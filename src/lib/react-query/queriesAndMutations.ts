@@ -177,7 +177,7 @@ export const useDeletePost = () => {
 export const useGetPosts = () => {
     return useInfiniteQuery({
         queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-        queryFn: getInfinitePosts,
+        queryFn: ({ pageParam = 0 }) => getInfinitePosts({ pageParam }),
         getNextPageParam: (lastPage) => {
             if (!lastPage || !Array.isArray(lastPage.documents)) {
                 return null;
@@ -189,11 +189,13 @@ export const useGetPosts = () => {
             }
 
             // Use the $id of the last document as the cursor.
-            const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
+            const lastId = parseInt(lastPage.documents[lastPage.documents.length - 1].$id, 10);
             return lastId;
-        }
+        },
+        initialPageParam: 0
     });
 };
+
 
 export const useSearchPosts = (searchTerm: string) => {
     return useQuery({

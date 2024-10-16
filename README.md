@@ -11,11 +11,12 @@ Insgram is a full-stack social media website developed using React JS, Appwrite,
 - **Saved Posts**: View a list of saved posts.
 - **Create Post**: Write and publish new posts.
 
-## Demo Video
-[Watch the demo on YouTube](https://youtube.com/shorts/vncEU2tCbpk?feature=share)
+## Website
 
-## Site
-https://insgram.vercel.app/sign-in
+https://insgram.vercel.app/
+
+## Demo Video
+[Watch the demo on YouTube](https://youtube.com/shorts/sydTy-bbnWo)
 
 This platform allows users to share and connect through posts.
 
